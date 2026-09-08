@@ -1,0 +1,435 @@
+/* ---------- Design tokens ---------- */
+:root {
+  --bg: #fbfbfa;
+  --surface: #ffffff;
+  --text: #16181d;
+  --muted: #6b7280;
+  --line: #e6e6e3;
+  --accent: #16181d;
+  --accent-soft: #f2f2f0;
+  --danger: #b4402f;
+  --success: #2f7d5d;
+  --radius: 10px;
+  --gap: 18px;
+}
+
+* { box-sizing: border-box; }
+
+/* The hidden attribute must win over display rules such as flex/grid. */
+[hidden] { display: none !important; }
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: ui-sans-serif, -apple-system, "Segoe UI", Inter, Roboto, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1 { font-size: 24px; font-weight: 600; letter-spacing: -0.01em; margin: 0 0 4px; }
+h2 { font-size: 15px; font-weight: 600; margin: 0; }
+h3 { font-size: 14px; font-weight: 600; margin: 0; }
+
+.hint { color: var(--muted); font-size: 14px; margin: 0 0 28px; }
+
+/* ---------- Top bar ---------- */
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 16px 28px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+}
+
+.brand { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+
+.brand-mark {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 13px;
+}
+
+.topbar-right { display: flex; align-items: center; gap: 12px; }
+.topbar-note { color: var(--muted); font-size: 13px; }
+
+/* WebMCP status: tells the user whether the AI tools are available */
+.badge {
+  padding: 3px 9px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.badge.on { border-color: var(--text); color: var(--text); }
+
+/* ---------- Layout ---------- */
+.page { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+
+/* ---------- Intro ---------- */
+.intro { margin-bottom: 24px; }
+
+/* ---------- Section menu ---------- */
+.section-nav {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 0;
+  margin-bottom: 12px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+
+.section-nav a {
+  padding: 6px 12px;
+  border-radius: 999px;
+  color: var(--muted);
+  font-size: 13px;
+  text-decoration: none;
+}
+
+.section-nav a:hover { background: var(--accent-soft); color: var(--text); }
+.section-nav a.active { background: var(--accent); color: #fff; }
+
+/* ---------- Sections ---------- */
+.section {
+  padding: 26px;
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  scroll-margin-top: 72px;
+}
+
+.section-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.section-head h2 { font-size: 17px; }
+.section-note { color: var(--muted); font-size: 13px; }
+
+/* ---------- Fields ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--gap);
+}
+
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field.full, .check.full { grid-column: 1 / -1; }
+
+.field > span {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  font: inherit;
+  font-size: 14px;
+  transition: border-color .15s, box-shadow .15s;
+}
+
+textarea { resize: vertical; }
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: var(--text);
+  box-shadow: 0 0 0 3px rgba(22, 24, 29, .08);
+}
+
+input.invalid, select.invalid, textarea.invalid {
+  border-color: var(--danger);
+  box-shadow: 0 0 0 3px rgba(180, 64, 47, .1);
+}
+
+input:disabled { background: var(--accent-soft); color: var(--muted); }
+
+.counter { color: var(--muted); font-size: 12px; text-align: right; }
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.check input { width: 16px; height: 16px; accent-color: var(--accent); }
+
+.error-text { color: var(--danger); font-size: 13px; margin: 16px 0 0; }
+
+/* ---------- Repeatable entries ---------- */
+.entries { display: flex; flex-direction: column; gap: 14px; }
+
+.entry {
+  padding: 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.entry-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+
+.entry-title { color: var(--muted); font-weight: 500; }
+
+.entry-inline {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  align-items: end;
+  gap: 12px;
+}
+
+.empty {
+  color: var(--muted);
+  font-size: 14px;
+  padding: 20px;
+  text-align: center;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  margin: 0;
+}
+
+/* An entry changed by an AI tool blinks once, so the user notices it. */
+.flash { animation: flash 1.2s ease-out; }
+
+@keyframes flash {
+  from { box-shadow: 0 0 0 3px rgba(22, 24, 29, .16); }
+  to   { box-shadow: 0 0 0 3px rgba(22, 24, 29, 0); }
+}
+
+/* ---------- Tags ---------- */
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+}
+
+.tags input {
+  flex: 1 1 160px;
+  border: none;
+  padding: 4px;
+  background: transparent;
+}
+
+.tags input:focus { box-shadow: none; }
+
+.tag {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 6px 4px 10px;
+  border-radius: 999px;
+  background: var(--accent-soft);
+  font-size: 13px;
+}
+
+.tag button {
+  border: none;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  padding: 0 2px;
+}
+
+/* ---------- Buttons ---------- */
+button { font: inherit; }
+
+.btn-primary, .btn-secondary {
+  padding: 10px 18px;
+  border-radius: var(--radius);
+  font-size: 14px;
+  cursor: pointer;
+  border: 1px solid transparent;
+}
+
+.btn-primary { background: var(--accent); color: #fff; }
+.btn-primary:hover { opacity: .88; }
+
+.btn-secondary { background: var(--surface); border-color: var(--line); color: var(--text); }
+.btn-secondary:hover { background: var(--accent-soft); }
+
+.btn-ghost {
+  border: none;
+  background: none;
+  color: var(--text);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+.btn-ghost:hover { background: var(--accent-soft); }
+
+.btn-dashed {
+  width: 100%;
+  margin-top: 14px;
+  padding: 12px;
+  border: 1px dashed var(--line);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--muted);
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.btn-dashed:hover { border-color: var(--text); color: var(--text); }
+
+.btn-remove {
+  width: 30px;
+  height: 30px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--surface);
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.btn-remove:hover { border-color: var(--danger); color: var(--danger); }
+
+/* ---------- Submit row ---------- */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 22px;
+}
+
+.summary-line { color: var(--muted); font-size: 13px; }
+
+/* ---------- Success ---------- */
+.done { text-align: center; padding: 60px 0; }
+
+.done-mark {
+  width: 44px;
+  height: 44px;
+  margin: 0 auto 16px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+}
+
+pre {
+  text-align: left;
+  padding: 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  font-size: 12.5px;
+  overflow: auto;
+  max-height: 340px;
+}
+
+/* ---------- WebMCP tool banner ---------- */
+/* Full width strip so the pill can be centred and grow with its text. */
+.tool-banner {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  z-index: 20;
+  display: flex;
+  justify-content: center;
+  padding: 0 16px;
+  pointer-events: none;
+}
+
+.tool-banner-pill {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  max-width: 100%;
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, .12);
+  font-size: 13px;
+  animation: rise .2s ease-out;
+}
+
+.tool-banner-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.tool-banner.running .tool-banner-dot { background: var(--text); animation: pulse 1s infinite; }
+.tool-banner.ok .tool-banner-dot { background: var(--success); }
+.tool-banner.error .tool-banner-dot { background: var(--danger); }
+
+.tool-banner-label { flex: none; font-weight: 500; }
+.tool-banner.error .tool-banner-label { color: var(--danger); }
+
+.tool-banner code {
+  flex: none;
+  padding: 2px 7px;
+  border-radius: 6px;
+  background: var(--accent-soft);
+  font-size: 12.5px;
+}
+
+.tool-banner-text {
+  color: var(--muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@keyframes rise {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+  50% { opacity: .25; }
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width: 620px) {
+  .grid, .entry-inline { grid-template-columns: 1fr; }
+  .entry-inline .btn-remove { justify-self: end; }
+  .topbar-note { display: none; }
+}

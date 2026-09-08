@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tech Labs — Candidate Profile</title>
+
+  <!-- WebMCP is behind an origin trial. On a deployed origin (GitHub Pages), paste the
+       token you registered for it here; on localhost the chrome://flags switch is enough.
+  <meta http-equiv="origin-trial" content="YOUR_ORIGIN_TRIAL_TOKEN" />
+  -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark">T</span>
+      <span class="brand-name">Tech Labs</span>
+    </div>
+    <div class="topbar-right">
+      <span class="topbar-note">Application · Senior Full Stack Engineer</span>
+      <span class="badge" id="webmcp-status">AI tools…</span>
+    </div>
+  </header>
+
+  <main class="page">
+
+    <div class="intro">
+      <h1>Candidate profile</h1>
+      <p class="hint">
+        Fill in every section below. Fields marked with * are required.
+      </p>
+    </div>
+
+    <!-- Section menu: highlights the section you are looking at -->
+    <nav class="section-nav" id="section-nav">
+      <a href="#personal">Personal</a>
+      <a href="#links">Links</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#skills">Skills</a>
+      <a href="#languages">Languages</a>
+      <a href="#submit">Submit</a>
+    </nav>
+
+    <form id="cv-form" novalidate>
+
+      <!-- ============ Personal ============ -->
+      <section class="section" id="personal">
+        <div class="section-head">
+          <h2>Personal details</h2>
+          <span class="section-note">Basic contact information</span>
+        </div>
+
+        <div class="grid">
+          <label class="field">
+            <span>Full name *</span>
+            <input type="text" name="fullName" placeholder="Ada Lovelace" required />
+          </label>
+
+          <label class="field">
+            <span>Professional headline *</span>
+            <input type="text" name="headline" placeholder="Senior Full Stack Engineer" required />
+          </label>
+
+          <label class="field">
+            <span>Email *</span>
+            <input type="email" name="email" placeholder="ada@example.com" required />
+          </label>
+
+          <label class="field">
+            <span>Phone</span>
+            <input type="tel" name="phone" placeholder="+34 600 000 000" />
+          </label>
+
+          <label class="field">
+            <span>City *</span>
+            <input type="text" name="city" placeholder="Madrid" required />
+          </label>
+
+          <label class="field">
+            <span>Country *</span>
+            <input type="text" name="country" placeholder="Spain" required />
+          </label>
+
+          <label class="field">
+            <span>Work setup</span>
+            <select name="workSetup">
+              <option value="onsite">On-site</option>
+              <option value="hybrid" selected>Hybrid</option>
+              <option value="remote">Remote</option>
+            </select>
+          </label>
+
+          <label class="field">
+            <span>Years of experience</span>
+            <input type="number" name="yearsOfExperience" min="0" max="60" placeholder="8" />
+          </label>
+
+          <label class="field full">
+            <span>Short summary</span>
+            <textarea name="summary" rows="4" maxlength="400"
+              placeholder="Two or three lines about your profile."></textarea>
+            <small class="counter" data-counter-for="summary">0 / 400</small>
+          </label>
+        </div>
+      </section>
+
+      <!-- ============ Links ============ -->
+      <section class="section" id="links">
+        <div class="section-head">
+          <h2>Links</h2>
+          <span class="section-note">Portfolio, LinkedIn, GitHub…</span>
+        </div>
+
+        <div class="entries" id="link-list"></div>
+        <p class="empty" data-empty-for="link">No links added yet.</p>
+        <button type="button" class="btn-dashed" data-add="link">+ Add link</button>
+      </section>
+
+      <!-- ============ Work experience ============ -->
+      <section class="section" id="experience">
+        <div class="section-head">
+          <h2>Work experience</h2>
+          <span class="section-note">One entry per position, most recent first</span>
+        </div>
+
+        <div class="entries" id="experience-list"></div>
+        <p class="empty" data-empty-for="experience">No positions added yet.</p>
+        <button type="button" class="btn-dashed" data-add="experience">+ Add position</button>
+      </section>
+
+      <!-- ============ Education ============ -->
+      <section class="section" id="education">
+        <div class="section-head">
+          <h2>Education</h2>
+          <span class="section-note">Degrees, bootcamps and certifications</span>
+        </div>
+
+        <div class="entries" id="education-list"></div>
+        <p class="empty" data-empty-for="education">No studies added yet.</p>
+        <button type="button" class="btn-dashed" data-add="education">+ Add education</button>
+      </section>
+
+      <!-- ============ Skills ============ -->
+      <section class="section" id="skills">
+        <div class="section-head">
+          <h2>Skills</h2>
+          <span class="section-note">Type a skill and press Enter</span>
+        </div>
+
+        <div class="field">
+          <span>Skills *</span>
+          <div class="tags" id="skill-tags">
+            <input type="text" id="skill-input" placeholder="React, Node.js, PostgreSQL…" />
+          </div>
+        </div>
+      </section>
+
+      <!-- ============ Languages ============ -->
+      <section class="section" id="languages">
+        <div class="section-head">
+          <h2>Languages</h2>
+          <span class="section-note">Spoken languages and level</span>
+        </div>
+
+        <div class="entries" id="language-list"></div>
+        <p class="empty" data-empty-for="language">No languages added yet.</p>
+        <button type="button" class="btn-dashed" data-add="language">+ Add language</button>
+      </section>
+
+      <!-- ============ Submit ============ -->
+      <section class="section" id="submit">
+        <div class="section-head">
+          <h2>Send your application</h2>
+          <span class="section-note">Last step</span>
+        </div>
+
+        <label class="check">
+          <input type="checkbox" id="consent" required />
+          <span>I agree that Tech Labs stores this data for 12 months.</span>
+        </label>
+
+        <div class="actions">
+          <button type="submit" class="btn-primary">Send application</button>
+          <span class="summary-line" id="summary-line"></span>
+        </div>
+      </section>
+    </form>
+
+    <!-- ============ Success screen ============ -->
+    <section class="done" id="done" hidden>
+      <div class="done-mark">✓</div>
+      <h1>Application sent</h1>
+      <p class="hint">This is the payload we would send to the server.</p>
+      <pre id="payload"></pre>
+      <button type="button" class="btn-secondary" id="restart-btn">Start over</button>
+    </section>
+  </main>
+
+  <!-- Shows which WebMCP tool an AI agent is running right now -->
+  <div class="tool-banner" id="tool-banner" hidden>
+    <div class="tool-banner-pill">
+      <span class="tool-banner-dot"></span>
+      <span class="tool-banner-label" id="tool-banner-label"></span>
+      <code id="tool-banner-name"></code>
+      <span class="tool-banner-text" id="tool-banner-text"></span>
+    </div>
+  </div>
+
+  <!-- ============ Templates for repeatable blocks ============ -->
+
+  <template id="link-template">
+    <div class="entry entry-inline">
+      <label class="field">
+        <span>Label</span>
+        <input type="text" name="label" placeholder="LinkedIn" />
+      </label>
+      <label class="field">
+        <span>URL</span>
+        <input type="url" name="url" placeholder="https://…" />
+      </label>
+      <button type="button" class="btn-remove" title="Remove">×</button>
+    </div>
+  </template>
+
+  <template id="experience-template">
+    <div class="entry">
+      <div class="entry-head">
+        <h3 class="entry-title">Position</h3>
+        <button type="button" class="btn-remove" title="Remove">×</button>
+      </div>
+      <div class="grid">
+        <label class="field">
+          <span>Job title *</span>
+          <input type="text" name="jobTitle" placeholder="Full Stack Engineer" required />
+        </label>
+        <label class="field">
+          <span>Company *</span>
+          <input type="text" name="company" placeholder="Acme Inc." required />
+        </label>
+        <label class="field">
+          <span>Employment type</span>
+          <select name="employmentType">
+            <option value="full-time">Full-time</option>
+            <option value="part-time">Part-time</option>
+            <option value="contract">Contract</option>
+            <option value="internship">Internship</option>
+          </select>
+        </label>
+        <label class="field">
+          <span>Location</span>
+          <input type="text" name="location" placeholder="Madrid, Spain" />
+        </label>
+        <label class="field">
+          <span>Start date *</span>
+          <input type="month" name="startDate" required />
+        </label>
+        <label class="field">
+          <span>End date</span>
+          <input type="month" name="endDate" />
+        </label>
+        <label class="check full">
+          <input type="checkbox" name="current" data-toggle="current" />
+          <span>I currently work here</span>
+        </label>
+        <label class="field full">
+          <span>What did you do there?</span>
+          <textarea name="description" rows="3"
+            placeholder="Main responsibilities and achievements."></textarea>
+        </label>
+      </div>
+    </div>
+  </template>
+
+  <template id="education-template">
+    <div class="entry">
+      <div class="entry-head">
+        <h3 class="entry-title">Education</h3>
+        <button type="button" class="btn-remove" title="Remove">×</button>
+      </div>
+      <div class="grid">
+        <label class="field">
+          <span>Degree *</span>
+          <input type="text" name="degree" placeholder="BSc Computer Science" required />
+        </label>
+        <label class="field">
+          <span>Institution *</span>
+          <input type="text" name="institution" placeholder="Universidad Politécnica" required />
+        </label>
+        <label class="field">
+          <span>Field of study</span>
+          <input type="text" name="fieldOfStudy" placeholder="Software Engineering" />
+        </label>
+        <label class="field">
+          <span>Grade</span>
+          <input type="text" name="grade" placeholder="8.4 / 10" />
+        </label>
+        <label class="field">
+          <span>Start date *</span>
+          <input type="month" name="startDate" required />
+        </label>
+        <label class="field">
+          <span>End date</span>
+          <input type="month" name="endDate" />
+        </label>
+        <label class="check full">
+          <input type="checkbox" name="current" data-toggle="current" />
+          <span>I am still studying here</span>
+        </label>
+      </div>
+    </div>
+  </template>
+
+  <template id="language-template">
+    <div class="entry entry-inline">
+      <label class="field">
+        <span>Language</span>
+        <input type="text" name="language" placeholder="English" />
+      </label>
+      <label class="field">
+        <span>Level</span>
+        <select name="level">
+          <option value="basic">Basic</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+          <option value="native">Native</option>
+        </select>
+      </label>
+      <button type="button" class="btn-remove" title="Remove">×</button>
+    </div>
+  </template>
+
+  <script src="app.js"></script>
+  <script src="webmcp.js"></script>
+</body>
+</html>
